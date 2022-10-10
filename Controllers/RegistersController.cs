@@ -49,6 +49,14 @@ namespace WebAppMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Email,CreateTime")] Register register)
         {
+            #region
+            var data=db.Registers.FirstOrDefault(x=>x.Email==register.Email);
+            if (data!=null)
+            {
+                ModelState.AddModelError(string.Empty,"這個Email 已經報名過了 無法在報名");
+            }
+
+            #endregion
             if (ModelState.IsValid)
             {
                 db.Registers.Add(register);
