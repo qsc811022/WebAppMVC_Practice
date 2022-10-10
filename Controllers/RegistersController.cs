@@ -33,11 +33,12 @@ namespace WebAppMVC.Controllers
 
             try
             {
-                Register register = db.Registers.Find(id);
-                if (register == null)
-                {
-                   throw new Exception("record not found");
-                }
+                //Register register = db.Registers.Find(id);
+                //if (register == null)
+                //{
+                //   throw new Exception("record not found");
+                //}
+                var register = new RegisterService().Find(id.Value);
                 return View(register);
             }
             catch (Exception)

@@ -24,10 +24,16 @@ namespace WebAppMVC.Models.Service
             #endregion
             db.Registers.Add(register);
             db.SaveChanges();
-
-
         }
-
+        public Register Find(int id)
+        {
+            Register register = db.Registers.Find(id);
+            if (register == null)
+            {
+                throw new Exception("record not found");
+            }
+            return register;
+        }
 
 
     }
