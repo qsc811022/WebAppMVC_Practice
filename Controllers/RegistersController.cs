@@ -29,12 +29,34 @@ namespace WebAppMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Register register = db.Registers.Find(id);
-            if (register == null)
+
+
+            try
             {
-                return HttpNotFound();
+                Register register = db.Registers.Find(id);
+                if (register == null)
+                {
+                   throw new Exception("record not found");
+                }
+                return View(register);
             }
-            return View(register);
+            catch (Exception)
+            {
+
+               return HttpNotFound();
+            }
+
+
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //Register register = db.Registers.Find(id);
+            //if (register == null)
+            //{
+            //    return HttpNotFound();
+            //}
+           
         }
 
         // GET: Registers/Create
