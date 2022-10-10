@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebAppMVC.Data;
 using WebAppMVC.Models.EFModel;
+using WebAppMVC.Models.Service;
 
 namespace WebAppMVC.Controllers
 {
@@ -49,28 +50,47 @@ namespace WebAppMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Email")] Register register)
         {
-            #region
-            var data=db.Registers.FirstOrDefault(x=>x.Email==register.Email);
-            if (data!=null)
+            try
             {
-                ModelState.AddModelError(string.Empty,"這個Email 已經報名過了 無法在報名");
+        
+                //var data = db.Registers.FirstOrDefault(x => x.Email == register.Email);
+                //if (data != null)
+                //{
+                //   throw new Exception("這個email已經報名過了");
+                //}
+
+                //#endregion
+                //#region
+                //register.CreateTime = DateTime.Now;
+                //#endregion
+                //db.Registers.Add(register);
+                //db.SaveChanges();
+                new RegisterService().Create(register);
+            }
+            catch (Exception)
+            {
+
+                ModelState.AddModelError(string.Empty, "這個Email 已經報名過了 無法在報名");
             }
 
-            #endregion
-            #region
-            register.CreateTime=DateTime.Now;
-            #endregion
+
+
+
+         
+
 
 
             if (ModelState.IsValid)
             {
-                db.Registers.Add(register);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             return View(register);
         }
+
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
