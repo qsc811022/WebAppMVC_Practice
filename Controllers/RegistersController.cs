@@ -47,7 +47,7 @@ namespace WebAppMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email,CreateTime")] Register register)
+        public ActionResult Create([Bind(Include = "Id,Name,Email")] Register register)
         {
             #region
             var data=db.Registers.FirstOrDefault(x=>x.Email==register.Email);
@@ -57,6 +57,11 @@ namespace WebAppMVC.Controllers
             }
 
             #endregion
+            #region
+            register.CreateTime=DateTime.Now;
+            #endregion
+
+
             if (ModelState.IsValid)
             {
                 db.Registers.Add(register);
