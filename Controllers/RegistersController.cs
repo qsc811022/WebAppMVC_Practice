@@ -20,7 +20,7 @@ namespace WebAppMVC.Controllers
         // GET: Registers
         public ActionResult Index()
         {
-            return View(db.Registers.ToList());
+            return View();
         }
 
         // GET: Registers/Details/5
@@ -34,8 +34,8 @@ namespace WebAppMVC.Controllers
 
             try
             {
-                var register = new RegisterService().Find(id.Value);
-                return View(register);
+               Register register = new RegisterService().Find(id.Value);
+                return View(register.Entity2DetailsVM());
             }
             catch (Exception)
             {
