@@ -138,6 +138,7 @@
     <Compile Include="Models\EFModel\Register.cs" />
     <Compile Include="Models\EFModel\RegisterModel.cs" />
     <Compile Include="Models\Service\RegisterService.cs" />
+    <Compile Include="Models\ViewModel\RegisterVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

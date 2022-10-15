@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using WebAppMVC.Data;
 using WebAppMVC.Models.EFModel;
 using WebAppMVC.Models.Service;
+using WebAppMVC.Models.ViewModel;
 
 namespace WebAppMVC.Controllers
 {
@@ -66,7 +67,7 @@ namespace WebAppMVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Email")] Register register)
+        public ActionResult Create(RegisterVM register)
         {
             try
             {
@@ -83,7 +84,7 @@ namespace WebAppMVC.Controllers
                 //#endregion
                 //db.Registers.Add(register);
                 //db.SaveChanges();
-                new RegisterService().Create(register);
+                new RegisterService().Create(register.VM2Entity());
             }
             catch (Exception)
             {
